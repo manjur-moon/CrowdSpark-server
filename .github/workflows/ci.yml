@@ -1,0 +1,31 @@
+name: CrowdSpark Server CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: test
+      BETTER_AUTH_URL: http://127.0.0.1:5000
+      BETTER_AUTH_SECRET: github_actions_test_secret_with_at_least_32_characters
+      CLIENT_URL: http://127.0.0.1:5173
+      WITHDRAWAL_ENCRYPTION_KEY: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+      DEMO_PAYMENTS: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run format:check
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test:coverage
+      - run: npm run test:integration
+      - run: npm run build
