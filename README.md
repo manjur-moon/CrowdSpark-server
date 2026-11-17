@@ -56,10 +56,10 @@ Financial operations use integer credits and integer cents. Critical multi-docum
 
 ## Project Links
 
-| Resource | URL |
-|---|---|
-| Live API | `https://YOUR_SERVER_DOMAIN.onrender.com` |
-| Live Website | `https://YOUR_CLIENT_DOMAIN.vercel.app` |
+| Resource          | URL                                                         |
+| ----------------- | ----------------------------------------------------------- |
+| Live API          | `https://YOUR_SERVER_DOMAIN.onrender.com`                   |
+| Live Website      | `https://YOUR_CLIENT_DOMAIN.vercel.app`                     |
 | Server Repository | `https://github.com/YOUR_GITHUB_USERNAME/CrowdSpark-server` |
 | Client Repository | `https://github.com/YOUR_GITHUB_USERNAME/CrowdSpark-client` |
 
@@ -67,10 +67,10 @@ Financial operations use integer credits and integer cents. Critical multi-docum
 
 ## Demo Credentials
 
-| Role | Email | Password |
-|---|---|---|
-| Admin | `admin@crowdspark.demo` | `Admin12345` |
-| Creator | `creator@crowdspark.demo` | `Creator12345` |
+| Role      | Email                       | Password         |
+| --------- | --------------------------- | ---------------- |
+| Admin     | `admin@crowdspark.demo`     | `Admin12345`     |
+| Creator   | `creator@crowdspark.demo`   | `Creator12345`   |
 | Supporter | `supporter@crowdspark.demo` | `Supporter12345` |
 
 > Run the seed command to create the demo accounts in a development database. Do not seed a production database containing real data.
@@ -106,34 +106,34 @@ Financial operations use integer credits and integer cents. Critical multi-docum
 
 ### Runtime Dependencies
 
-| Package | Purpose |
-|---|---|
-| Express | HTTP server and route handling |
-| TypeScript | Static type safety |
-| MongoDB Driver | Better Auth database access and low-level database operations |
-| Mongoose | Domain models, indexes, queries, and transactions |
-| Better Auth | Authentication and session management |
-| Better Auth Mongo Adapter | MongoDB persistence for authentication records |
-| Stripe | Checkout sessions and webhook verification |
-| Zod | Request validation |
-| Multer | Multipart image uploads |
-| Helmet | Security-related HTTP headers |
-| CORS | Allowed-origin configuration |
-| Express Rate Limit | Abuse and brute-force protection |
-| Morgan | Development HTTP logging |
-| dotenv | Environment-variable loading |
+| Package                   | Purpose                                                       |
+| ------------------------- | ------------------------------------------------------------- |
+| Express                   | HTTP server and route handling                                |
+| TypeScript                | Static type safety                                            |
+| MongoDB Driver            | Better Auth database access and low-level database operations |
+| Mongoose                  | Domain models, indexes, queries, and transactions             |
+| Better Auth               | Authentication and session management                         |
+| Better Auth Mongo Adapter | MongoDB persistence for authentication records                |
+| Stripe                    | Checkout sessions and webhook verification                    |
+| Zod                       | Request validation                                            |
+| Multer                    | Multipart image uploads                                       |
+| Helmet                    | Security-related HTTP headers                                 |
+| CORS                      | Allowed-origin configuration                                  |
+| Express Rate Limit        | Abuse and brute-force protection                              |
+| Morgan                    | Development HTTP logging                                      |
+| dotenv                    | Environment-variable loading                                  |
 
 ### Development and Testing
 
-| Package | Purpose |
-|---|---|
-| Vitest | Unit and integration tests |
-| Supertest | API contract and integration testing |
-| mongodb-memory-server | Isolated MongoDB replica-set tests |
-| tsx | TypeScript development runner |
-| ESLint | Static code analysis |
-| Prettier | Code formatting |
-| V8 Coverage | Coverage reports |
+| Package               | Purpose                              |
+| --------------------- | ------------------------------------ |
+| Vitest                | Unit and integration tests           |
+| Supertest             | API contract and integration testing |
+| mongodb-memory-server | Isolated MongoDB replica-set tests   |
+| tsx                   | TypeScript development runner        |
+| ESLint                | Static code analysis                 |
+| Prettier              | Code formatting                      |
+| V8 Coverage           | Coverage reports                     |
 
 ---
 
@@ -215,115 +215,115 @@ http://localhost:5000/api/auth
 
 ### Public API
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/v1/health` | API health check |
-| `GET` | `/api/v1/stats` | Public platform statistics |
-| `GET` | `/api/v1/campaigns/categories` | Campaign categories |
-| `GET` | `/api/v1/campaigns` | Search/filter/sort approved campaigns |
-| `GET` | `/api/v1/campaigns/:campaignId` | Public campaign details |
-| `GET` | `/api/v1/campaigns/:campaignId/updates` | Public campaign updates |
-| `POST` | `/api/v1/contact` | Store a contact message |
+| Method | Endpoint                                | Description                           |
+| ------ | --------------------------------------- | ------------------------------------- |
+| `GET`  | `/api/v1/health`                        | API health check                      |
+| `GET`  | `/api/v1/stats`                         | Public platform statistics            |
+| `GET`  | `/api/v1/campaigns/categories`          | Campaign categories                   |
+| `GET`  | `/api/v1/campaigns`                     | Search/filter/sort approved campaigns |
+| `GET`  | `/api/v1/campaigns/:campaignId`         | Public campaign details               |
+| `GET`  | `/api/v1/campaigns/:campaignId/updates` | Public campaign updates               |
+| `POST` | `/api/v1/contact`                       | Store a contact message               |
 
 ### Authentication
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `POST` | `/api/auth/sign-up/email` | Email/password registration |
-| `POST` | `/api/auth/sign-in/email` | Email/password login |
-| `GET` | `/api/auth/get-session` | Current Better Auth session |
-| `GET` | `/api/auth/token` | Short-lived JWT access token |
-| `POST` | `/api/auth/sign-out` | End the current session |
-| `GET` | `/api/auth/callback/google` | Google OAuth callback |
+| Method | Endpoint                    | Description                  |
+| ------ | --------------------------- | ---------------------------- |
+| `POST` | `/api/auth/sign-up/email`   | Email/password registration  |
+| `POST` | `/api/auth/sign-in/email`   | Email/password login         |
+| `GET`  | `/api/auth/get-session`     | Current Better Auth session  |
+| `GET`  | `/api/auth/token`           | Short-lived JWT access token |
+| `POST` | `/api/auth/sign-out`        | End the current session      |
+| `GET`  | `/api/auth/callback/google` | Google OAuth callback        |
 
 ### User and Wallet
 
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `GET` | `/api/v1/users/me` | Session | Current user and profile |
-| `POST` | `/api/v1/users/onboarding` | Session | Complete role onboarding |
-| `GET` | `/api/v1/users/wallet/transactions` | Authenticated | Wallet ledger history |
+| Method | Endpoint                            | Access        | Description              |
+| ------ | ----------------------------------- | ------------- | ------------------------ |
+| `GET`  | `/api/v1/users/me`                  | Session       | Current user and profile |
+| `POST` | `/api/v1/users/onboarding`          | Session       | Complete role onboarding |
+| `GET`  | `/api/v1/users/wallet/transactions` | Authenticated | Wallet ledger history    |
 
 ### Campaigns
 
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `GET` | `/api/v1/campaigns/mine` | Creator/Admin | Owned campaigns |
-| `POST` | `/api/v1/campaigns` | Creator/Admin | Create campaign |
-| `PATCH` | `/api/v1/campaigns/:campaignId` | Creator/Admin | Update campaign |
-| `DELETE` | `/api/v1/campaigns/:campaignId` | Creator | Delete/refund/archive campaign |
+| Method   | Endpoint                        | Access        | Description                    |
+| -------- | ------------------------------- | ------------- | ------------------------------ |
+| `GET`    | `/api/v1/campaigns/mine`        | Creator/Admin | Owned campaigns                |
+| `POST`   | `/api/v1/campaigns`             | Creator/Admin | Create campaign                |
+| `PATCH`  | `/api/v1/campaigns/:campaignId` | Creator/Admin | Update campaign                |
+| `DELETE` | `/api/v1/campaigns/:campaignId` | Creator       | Delete/refund/archive campaign |
 
 ### Supporter Contributions
 
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `GET` | `/api/v1/contributions/dashboard` | Supporter | Contribution summary |
-| `POST` | `/api/v1/contributions` | Supporter | Create contribution |
-| `GET` | `/api/v1/contributions/mine` | Supporter | Paginated contribution history |
-| `GET` | `/api/v1/contributions/mine/:contributionId` | Supporter | Contribution details |
-| `POST` | `/api/v1/contributions/:contributionId/refund-requests` | Supporter | Request refund |
+| Method | Endpoint                                                | Access    | Description                    |
+| ------ | ------------------------------------------------------- | --------- | ------------------------------ |
+| `GET`  | `/api/v1/contributions/dashboard`                       | Supporter | Contribution summary           |
+| `POST` | `/api/v1/contributions`                                 | Supporter | Create contribution            |
+| `GET`  | `/api/v1/contributions/mine`                            | Supporter | Paginated contribution history |
+| `GET`  | `/api/v1/contributions/mine/:contributionId`            | Supporter | Contribution details           |
+| `POST` | `/api/v1/contributions/:contributionId/refund-requests` | Supporter | Request refund                 |
 
 ### Creator Operations
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/v1/creator/dashboard` | Creator analytics |
-| `GET` | `/api/v1/creator/campaigns` | Creator campaigns |
-| `GET` | `/api/v1/creator/contributions` | Contributions requiring review |
-| `POST` | `/api/v1/creator/contributions/:id/approve` | Approve contribution |
-| `POST` | `/api/v1/creator/contributions/:id/reject` | Reject and restore credits |
-| `GET` | `/api/v1/creator/campaigns/:id/updates` | Campaign updates |
-| `POST` | `/api/v1/creator/campaigns/:id/updates` | Publish update |
-| `PATCH` | `/api/v1/creator/campaigns/:id/updates/:updateId` | Edit update |
-| `DELETE` | `/api/v1/creator/campaigns/:id/updates/:updateId` | Delete update |
-| `GET` | `/api/v1/creator/withdrawals` | Withdrawal history |
-| `POST` | `/api/v1/creator/withdrawals` | Request withdrawal |
+| Method   | Endpoint                                          | Description                    |
+| -------- | ------------------------------------------------- | ------------------------------ |
+| `GET`    | `/api/v1/creator/dashboard`                       | Creator analytics              |
+| `GET`    | `/api/v1/creator/campaigns`                       | Creator campaigns              |
+| `GET`    | `/api/v1/creator/contributions`                   | Contributions requiring review |
+| `POST`   | `/api/v1/creator/contributions/:id/approve`       | Approve contribution           |
+| `POST`   | `/api/v1/creator/contributions/:id/reject`        | Reject and restore credits     |
+| `GET`    | `/api/v1/creator/campaigns/:id/updates`           | Campaign updates               |
+| `POST`   | `/api/v1/creator/campaigns/:id/updates`           | Publish update                 |
+| `PATCH`  | `/api/v1/creator/campaigns/:id/updates/:updateId` | Edit update                    |
+| `DELETE` | `/api/v1/creator/campaigns/:id/updates/:updateId` | Delete update                  |
+| `GET`    | `/api/v1/creator/withdrawals`                     | Withdrawal history             |
+| `POST`   | `/api/v1/creator/withdrawals`                     | Request withdrawal             |
 
 ### Payments
 
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `GET` | `/api/v1/payments/packages` | Public | Credit packages |
-| `GET` | `/api/v1/payments/mine` | Supporter | Payment history |
-| `POST` | `/api/v1/payments/demo` | Supporter | Demo credit purchase |
-| `POST` | `/api/v1/payments/checkout` | Supporter | Create Stripe checkout session |
-| `POST` | `/api/v1/payments/webhook` | Stripe | Verify and process Stripe events |
+| Method | Endpoint                    | Access    | Description                      |
+| ------ | --------------------------- | --------- | -------------------------------- |
+| `GET`  | `/api/v1/payments/packages` | Public    | Credit packages                  |
+| `GET`  | `/api/v1/payments/mine`     | Supporter | Payment history                  |
+| `POST` | `/api/v1/payments/demo`     | Supporter | Demo credit purchase             |
+| `POST` | `/api/v1/payments/checkout` | Supporter | Create Stripe checkout session   |
+| `POST` | `/api/v1/payments/webhook`  | Stripe    | Verify and process Stripe events |
 
 ### Notifications, Reports, and Uploads
 
-| Method | Endpoint | Access | Description |
-|---|---|---|---|
-| `GET` | `/api/v1/notifications` | Authenticated | Notification list |
-| `GET` | `/api/v1/notifications/unread-count` | Authenticated | Unread count |
-| `PATCH` | `/api/v1/notifications/read-all` | Authenticated | Mark all read |
-| `PATCH` | `/api/v1/notifications/:id/read` | Authenticated | Mark one read |
-| `POST` | `/api/v1/reports` | Supporter/Creator | Submit a report |
-| `POST` | `/api/v1/uploads/images` | Authenticated | Upload a validated image |
+| Method  | Endpoint                             | Access            | Description              |
+| ------- | ------------------------------------ | ----------------- | ------------------------ |
+| `GET`   | `/api/v1/notifications`              | Authenticated     | Notification list        |
+| `GET`   | `/api/v1/notifications/unread-count` | Authenticated     | Unread count             |
+| `PATCH` | `/api/v1/notifications/read-all`     | Authenticated     | Mark all read            |
+| `PATCH` | `/api/v1/notifications/:id/read`     | Authenticated     | Mark one read            |
+| `POST`  | `/api/v1/reports`                    | Supporter/Creator | Submit a report          |
+| `POST`  | `/api/v1/uploads/images`             | Authenticated     | Upload a validated image |
 
 ### Admin API
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/v1/admin/dashboard` | Admin analytics |
-| `GET` | `/api/v1/admin/users` | List/search/filter users |
-| `PATCH` | `/api/v1/admin/users/:id/role` | Update role |
-| `PATCH` | `/api/v1/admin/users/:id/status` | Activate/suspend/ban user |
-| `DELETE` | `/api/v1/admin/users/:id` | Securely remove user |
-| `GET` | `/api/v1/admin/campaigns` | Campaign moderation list |
-| `POST` | `/api/v1/admin/campaigns/:id/approve` | Approve campaign |
-| `POST` | `/api/v1/admin/campaigns/:id/reject` | Reject campaign |
-| `POST` | `/api/v1/admin/campaigns/:id/suspend` | Suspend campaign |
-| `DELETE` | `/api/v1/admin/campaigns/:id` | Delete/refund/archive campaign |
-| `GET` | `/api/v1/admin/reports` | Report list |
-| `POST` | `/api/v1/admin/reports/:id/resolve` | Resolve report |
-| `POST` | `/api/v1/admin/reports/:id/dismiss` | Dismiss report |
-| `GET` | `/api/v1/admin/withdrawals` | Withdrawal list |
-| `POST` | `/api/v1/admin/withdrawals/:id/approve` | Approve settlement |
-| `POST` | `/api/v1/admin/withdrawals/:id/reject` | Reject and restore balance |
-| `GET` | `/api/v1/admin/finance/summary` | Financial summary |
-| `GET` | `/api/v1/admin/payments` | Payment records |
-| `GET` | `/api/v1/admin/ledger` | Financial ledger |
-| `GET` | `/api/v1/admin/audit-logs` | Administrative audit history |
+| Method   | Endpoint                                | Description                    |
+| -------- | --------------------------------------- | ------------------------------ |
+| `GET`    | `/api/v1/admin/dashboard`               | Admin analytics                |
+| `GET`    | `/api/v1/admin/users`                   | List/search/filter users       |
+| `PATCH`  | `/api/v1/admin/users/:id/role`          | Update role                    |
+| `PATCH`  | `/api/v1/admin/users/:id/status`        | Activate/suspend/ban user      |
+| `DELETE` | `/api/v1/admin/users/:id`               | Securely remove user           |
+| `GET`    | `/api/v1/admin/campaigns`               | Campaign moderation list       |
+| `POST`   | `/api/v1/admin/campaigns/:id/approve`   | Approve campaign               |
+| `POST`   | `/api/v1/admin/campaigns/:id/reject`    | Reject campaign                |
+| `POST`   | `/api/v1/admin/campaigns/:id/suspend`   | Suspend campaign               |
+| `DELETE` | `/api/v1/admin/campaigns/:id`           | Delete/refund/archive campaign |
+| `GET`    | `/api/v1/admin/reports`                 | Report list                    |
+| `POST`   | `/api/v1/admin/reports/:id/resolve`     | Resolve report                 |
+| `POST`   | `/api/v1/admin/reports/:id/dismiss`     | Dismiss report                 |
+| `GET`    | `/api/v1/admin/withdrawals`             | Withdrawal list                |
+| `POST`   | `/api/v1/admin/withdrawals/:id/approve` | Approve settlement             |
+| `POST`   | `/api/v1/admin/withdrawals/:id/reject`  | Reject and restore balance     |
+| `GET`    | `/api/v1/admin/finance/summary`         | Financial summary              |
+| `GET`    | `/api/v1/admin/payments`                | Payment records                |
+| `GET`    | `/api/v1/admin/ledger`                  | Financial ledger               |
+| `GET`    | `/api/v1/admin/audit-logs`              | Administrative audit history   |
 
 > Sensitive mutation endpoints may require an `Idempotency-Key` header. Refer to the controller/validation code for the exact request schema.
 
@@ -435,22 +435,22 @@ IMGBB_API_KEY=YOUR_IMGBB_API_KEY
 WITHDRAWAL_ENCRYPTION_KEY=REPLACE_WITH_64_HEXADECIMAL_CHARACTERS
 ```
 
-| Variable | Required | Description |
-|---|---:|---|
-| `NODE_ENV` | Yes | `development`, `test`, or `production` |
-| `PORT` | Yes | Express server port |
-| `MONGODB_URI` | Yes | MongoDB connection string |
-| `MONGODB_DB_NAME` | Yes | Database name |
-| `CLIENT_URL` | Yes | Exact allowed frontend origin |
-| `BETTER_AUTH_URL` | Yes | Public backend origin used by Better Auth |
-| `BETTER_AUTH_SECRET` | Yes | Secure Better Auth signing secret |
-| `GOOGLE_CLIENT_ID` | Google login | Google OAuth client ID |
-| `GOOGLE_CLIENT_SECRET` | Google login | Google OAuth client secret |
-| `STRIPE_SECRET_KEY` | Real payments | Stripe secret key |
-| `STRIPE_WEBHOOK_SECRET` | Real payments | Stripe webhook signing secret |
-| `DEMO_PAYMENTS` | Yes | Enables/disables local demo payments |
-| `IMGBB_API_KEY` | Production images | ImgBB upload API key |
-| `WITHDRAWAL_ENCRYPTION_KEY` | Yes | 32-byte AES key encoded as 64 hex characters |
+| Variable                    |          Required | Description                                  |
+| --------------------------- | ----------------: | -------------------------------------------- |
+| `NODE_ENV`                  |               Yes | `development`, `test`, or `production`       |
+| `PORT`                      |               Yes | Express server port                          |
+| `MONGODB_URI`               |               Yes | MongoDB connection string                    |
+| `MONGODB_DB_NAME`           |               Yes | Database name                                |
+| `CLIENT_URL`                |               Yes | Exact allowed frontend origin                |
+| `BETTER_AUTH_URL`           |               Yes | Public backend origin used by Better Auth    |
+| `BETTER_AUTH_SECRET`        |               Yes | Secure Better Auth signing secret            |
+| `GOOGLE_CLIENT_ID`          |      Google login | Google OAuth client ID                       |
+| `GOOGLE_CLIENT_SECRET`      |      Google login | Google OAuth client secret                   |
+| `STRIPE_SECRET_KEY`         |     Real payments | Stripe secret key                            |
+| `STRIPE_WEBHOOK_SECRET`     |     Real payments | Stripe webhook signing secret                |
+| `DEMO_PAYMENTS`             |               Yes | Enables/disables local demo payments         |
+| `IMGBB_API_KEY`             | Production images | ImgBB upload API key                         |
+| `WITHDRAWAL_ENCRYPTION_KEY` |               Yes | 32-byte AES key encoded as 64 hex characters |
 
 Never commit `.env`. Only `.env.example` with safe placeholders should be tracked.
 
@@ -482,24 +482,24 @@ Warnings:
 
 ## Available Scripts
 
-| Command | Description |
-|---|---|
-| `npm run dev` | Start the development server with watch mode |
-| `npm run build` | Compile TypeScript to `dist` |
-| `npm start` | Run the compiled production server |
-| `npm run seed` | Seed development/demo data |
-| `npm run dev:demo` | Start zero-config demo mode |
-| `npm run migrate:financial-security` | Migrate encrypted/financial fields |
-| `npm run migrate:auth-rbac` | Migrate authorization fields |
-| `npm run typecheck` | Run TypeScript checks |
-| `npm run lint` | Run ESLint |
-| `npm run format` | Format code with Prettier |
-| `npm run format:check` | Verify formatting |
-| `npm test` | Run the Vitest suite |
-| `npm run test:unit` | Run unit/contract tests |
-| `npm run test:integration` | Run transaction and RBAC integration tests |
-| `npm run test:coverage` | Generate coverage reports |
-| `npm run test:all` | Run unit and integration tests |
+| Command                              | Description                                  |
+| ------------------------------------ | -------------------------------------------- |
+| `npm run dev`                        | Start the development server with watch mode |
+| `npm run build`                      | Compile TypeScript to `dist`                 |
+| `npm start`                          | Run the compiled production server           |
+| `npm run seed`                       | Seed development/demo data                   |
+| `npm run dev:demo`                   | Start zero-config demo mode                  |
+| `npm run migrate:financial-security` | Migrate encrypted/financial fields           |
+| `npm run migrate:auth-rbac`          | Migrate authorization fields                 |
+| `npm run typecheck`                  | Run TypeScript checks                        |
+| `npm run lint`                       | Run ESLint                                   |
+| `npm run format`                     | Format code with Prettier                    |
+| `npm run format:check`               | Verify formatting                            |
+| `npm test`                           | Run the Vitest suite                         |
+| `npm run test:unit`                  | Run unit/contract tests                      |
+| `npm run test:integration`           | Run transaction and RBAC integration tests   |
+| `npm run test:coverage`              | Generate coverage reports                    |
+| `npm run test:all`                   | Run unit and integration tests               |
 
 ---
 

@@ -42,9 +42,7 @@ export const auth = betterAuth({
     revokeSessionsOnPasswordReset: true,
 
     sendResetPassword: async ({ user, url }) => {
-      console.log(
-        `[CrowdSpark password reset] ${user.email}: ${url}`
-      );
+      console.log(`[CrowdSpark password reset] ${user.email}: ${url}`);
     }
   },
 
@@ -65,10 +63,7 @@ export const auth = betterAuth({
 
     accountLinking: {
       enabled: true,
-      trustedProviders: [
-        "google",
-        "email-password"
-      ],
+      trustedProviders: ["google", "email-password"],
       allowDifferentEmails: false
     }
   },
@@ -82,18 +77,12 @@ export const auth = betterAuth({
 
         audience: `${env.BETTER_AUTH_URL}/api/v1`,
 
-        definePayload: async ({
-          user,
-          session
-        }) => {
-          const profile =
-            await UserProfile.findOne({
-              authUserId: user.id
-            })
-              .select(
-                "role status authVersion"
-              )
-              .lean();
+        definePayload: async ({ user, session }) => {
+          const profile = await UserProfile.findOne({
+            authUserId: user.id
+          })
+            .select("role status authVersion")
+            .lean();
 
           return {
             type: "access",
@@ -102,34 +91,27 @@ export const auth = betterAuth({
             email: user.email,
             image: user.image ?? null,
             role: profile?.role ?? null,
-            status:
-              profile?.status ?? null,
-            profileVersion:
-              profile?.authVersion ?? 0
+            status: profile?.status ?? null,
+            profileVersion: profile?.authVersion ?? 0
           };
         }
       },
 
       jwks: {
-        rotationInterval:
-          60 * 60 * 24 * 30,
+        rotationInterval: 60 * 60 * 24 * 30,
 
-        gracePeriod:
-          60 * 60 * 24 * 30
+        gracePeriod: 60 * 60 * 24 * 30
       }
     })
   ],
 
   advanced: {
-    
     useSecureCookies: isProduction,
 
     defaultCookieAttributes: {
       httpOnly: true,
       secure: isProduction,
-      sameSite: isProduction
-        ? "none"
-        : "lax"
+      sameSite: isProduction ? "none" : "lax"
     }
   }
 });

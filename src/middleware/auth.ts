@@ -33,30 +33,18 @@ async function resolveAccessToken(req: AuthenticatedRequest, token: string) {
     throw new AppError(401, "INVALID_ACCESS_TOKEN", "Access token session is invalid");
   }
 
-  const activeSession = await mongoDb
-  .collection("session")
-  .findOne({
+  const activeSession = await mongoDb.collection("session").findOne({
     _id: new ObjectId(sessionId),
     expiresAt: {
       $gt: new Date()
     }
   });
 
-const activeSessionUserId =
-  activeSession?.userId
-    ? String(activeSession.userId)
-    : "";
+  const activeSessionUserId = activeSession?.userId ? String(activeSession.userId) : "";
 
-if (
-  !activeSession ||
-  activeSessionUserId !== payload.sub
-) {
-  throw new AppError(
-    401,
-    "SESSION_REVOKED",
-    "This session has expired or was revoked"
-  );
-}
+  if (!activeSession || activeSessionUserId !== payload.sub) {
+    throw new AppError(401, "SESSION_REVOKED", "This session has expired or was revoked");
+  }
 
   const user: SessionUser = {
     id: payload.sub,

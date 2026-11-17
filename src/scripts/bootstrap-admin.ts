@@ -1,111 +1,74 @@
 import { ObjectId } from "mongodb";
 
 import { auth } from "../config/auth.js";
-import {
-  connectDatabase,
-  disconnectDatabase,
-  mongoDb
-} from "../config/db.js";
+import { connectDatabase, disconnectDatabase, mongoDb } from "../config/db.js";
 import { UserProfile } from "../models/UserProfile.js";
 
 /**
  * Required environment variable পড়ে এবং নিশ্চিতভাবে string return করে।
  */
-function getRequiredEnvironmentVariable(
-  variableName: string
-): string {
-  const value =
-    process.env[variableName]?.trim();
+function getRequiredEnvironmentVariable(variableName: string): string {
+  const value = process.env[variableName]?.trim();
 
   if (!value) {
-    throw new Error(
-      `${variableName} is required`
-    );
+    throw new Error(`${variableName} is required`);
   }
 
   return value;
 }
 
-const adminEmail = getRequiredEnvironmentVariable(
-  "BOOTSTRAP_ADMIN_EMAIL"
-).toLowerCase();
+const adminEmail = getRequiredEnvironmentVariable("BOOTSTRAP_ADMIN_EMAIL").toLowerCase();
 
-const adminName =
-  process.env.BOOTSTRAP_ADMIN_NAME?.trim() ||
-  "CrowdSpark Admin";
+const adminName = process.env.BOOTSTRAP_ADMIN_NAME?.trim() || "CrowdSpark Admin";
 
-const adminPassword =
-  process.env.BOOTSTRAP_ADMIN_PASSWORD?.trim();
+const adminPassword = process.env.BOOTSTRAP_ADMIN_PASSWORD?.trim();
 
 async function bootstrapAdmin(): Promise<void> {
   await connectDatabase();
 
-  const authUsers =
-    mongoDb.collection("user");
+  const authUsers = mongoDb.collection("user");
 
-  const existingAuthUser =
-    await authUsers.findOne({
-      email: adminEmail
-    });
+  const existingAuthUser = await authUsers.findOne({
+    email: adminEmail
+  });
 
   let authUserId: string;
 
   if (existingAuthUser) {
-    authUserId = String(
-      existingAuthUser.id ??
-        existingAuthUser._id
-    );
+    authUserId = String(existingAuthUser.id ?? existingAuthUser._id);
 
-    console.log(
-      "Existing Better Auth user found."
-    );
+    console.log("Existing Better Auth user found.");
   } else {
-    if (
-      !adminPassword ||
-      adminPassword.length < 12
-    ) {
+    if (!adminPassword || adminPassword.length < 12) {
       throw new Error(
         "BOOTSTRAP_ADMIN_PASSWORD must contain at least 12 characters when creating a new admin account"
       );
     }
 
-    const signUpResult =
-      await auth.api.signUpEmail({
-        body: {
-          name: adminName,
-          email: adminEmail,
-          password: adminPassword
-        }
-      });
-
-    authUserId =
-      signUpResult.user.id;
-
-    console.log(
-      "New Better Auth user created."
-    );
-  }
-
-  const existingProfile =
-    await UserProfile.findOne({
-      authUserId
+    const signUpResult = await auth.api.signUpEmail({
+      body: {
+        name: adminName,
+        email: adminEmail,
+        password: adminPassword
+      }
     });
 
-  const profile = existingProfile
-    ? await updateExistingAdminProfile(
-        existingProfile
-      )
-    : await createAdminProfile(
-        authUserId
-      );
+    authUserId = signUpResult.user.id;
 
-  await revokeExistingSessions(
+    console.log("New Better Auth user created.");
+  }
+
+  const existingProfile = await UserProfile.findOne({
     authUserId
-  );
+  });
 
-  console.log(
-    "Admin account configured successfully."
-  );
+  const profile = existingProfile
+    ? await updateExistingAdminProfile(existingProfile)
+    : await createAdminProfile(authUserId);
+
+  await revokeExistingSessions(authUserId);
+
+  console.log("Admin account configured successfully.");
 
   console.table([
     {
@@ -113,41 +76,28 @@ async function bootstrapAdmin(): Promise<void> {
       email: profile.email,
       role: profile.role,
       status: profile.status,
-      profileId:
-        profile._id.toString()
+      profileId: profile._id.toString()
     }
   ]);
 }
 
-async function updateExistingAdminProfile(
-  existingProfile: InstanceType<
-    typeof UserProfile
-  >
-) {
-  existingProfile.name =
-    adminName;
+async function updateExistingAdminProfile(existingProfile: InstanceType<typeof UserProfile>) {
+  existingProfile.name = adminName;
 
-  existingProfile.email =
-    adminEmail;
+  existingProfile.email = adminEmail;
 
-  existingProfile.role =
-    "admin";
+  existingProfile.role = "admin";
 
-  existingProfile.status =
-    "active";
+  existingProfile.status = "active";
 
-  existingProfile.onboardingCompleted =
-    true;
+  existingProfile.onboardingCompleted = true;
 
-  existingProfile.authVersion =
-    (existingProfile.authVersion ?? 0) + 1;
+  existingProfile.authVersion = (existingProfile.authVersion ?? 0) + 1;
 
   return existingProfile.save();
 }
 
-async function createAdminProfile(
-  authUserId: string
-) {
+async function createAdminProfile(authUserId: string) {
   return UserProfile.create({
     authUserId,
     name: adminName,
@@ -164,38 +114,25 @@ async function createAdminProfile(
   });
 }
 
-async function revokeExistingSessions(
-  authUserId: string
-): Promise<void> {
-  const possibleUserIds: Array<
-    string | ObjectId
-  > = [authUserId];
+async function revokeExistingSessions(authUserId: string): Promise<void> {
+  const possibleUserIds: Array<string | ObjectId> = [authUserId];
 
   if (ObjectId.isValid(authUserId)) {
-    possibleUserIds.push(
-      new ObjectId(authUserId)
-    );
+    possibleUserIds.push(new ObjectId(authUserId));
   }
 
-  const result = await mongoDb
-    .collection("session")
-    .deleteMany({
-      userId: {
-        $in: possibleUserIds
-      }
-    });
+  const result = await mongoDb.collection("session").deleteMany({
+    userId: {
+      $in: possibleUserIds
+    }
+  });
 
-  console.log(
-    `${result.deletedCount} existing session(s) revoked.`
-  );
+  console.log(`${result.deletedCount} existing session(s) revoked.`);
 }
 
 bootstrapAdmin()
   .catch((error: unknown) => {
-    console.error(
-      "Admin bootstrap failed:",
-      error
-    );
+    console.error("Admin bootstrap failed:", error);
 
     process.exitCode = 1;
   })
