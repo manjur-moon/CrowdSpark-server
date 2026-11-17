@@ -95,6 +95,12 @@ describe("JWT access token and RBAC hardening", () => {
       lifetimeRaisedCredits: 0
     });
 
+    // A valid Better Auth cookie must authenticate the API even when a JWT
+    // is temporarily unavailable (the primary browser login path).
+    const cookieAuthorized = await agent.get("/api/v1/users/me");
+    expect(cookieAuthorized.status).toBe(200);
+    expect(cookieAuthorized.body.data.profile.id).toBe(profile._id.toString());
+
     const tokenResponse = await agent.get("/api/auth/token");
     expect(tokenResponse.status).toBe(200);
     expect(tokenResponse.body.token).toEqual(expect.any(String));

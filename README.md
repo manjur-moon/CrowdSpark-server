@@ -1,3 +1,5 @@
+> **Authentication hotfix:** See [AUTHENTICATION_FIX_GUIDE.md](AUTHENTICATION_FIX_GUIDE.md) for token-login failures, required environment variables and deployment diagnostics.
+
 <div align="center">
 
 # CrowdSpark API
